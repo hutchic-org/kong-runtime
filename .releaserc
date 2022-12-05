@@ -1,7 +1,7 @@
 {
   "branches": ["main"],
   "tagFormat": "${version}",
-  "repositoryUrl": "https://github.com/kong/kong-openresty.git",
+  "repositoryUrl": "https://github.com/kong/kong-runtime.git",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
