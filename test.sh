@@ -12,7 +12,8 @@ export $(grep -v '^#' $SCRIPT_DIR/.env | xargs)
 function test() {
     cp -R /tmp/build/* /
 
-    /usr/local/kong/bin/openssl version # From kong-openssl test.sh
+    /usr/local/kong/bin/openssl version     # From kong-openssl test.sh
+    ls -la /usr/local/kong/lib/libyaml.so   # From kong-openssl test.sh
 
     /usr/local/openresty/bin/openresty -v 2>&1 | grep -q ${OPENRESTY_VERSION}
     /usr/local/openresty/bin/openresty -V 2>&1 | grep -q pcre
