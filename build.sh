@@ -100,6 +100,10 @@ function main() {
     curl -fsSLo atc-router.tar.gz https://github.com/hutchic/atc-router/releases/download/$ATC_ROUTER_VERSION/$package_architecture-unknown-$OSTYPE.tar.gz
     tar -C /tmp/build -xvf atc-router.tar.gz
 
+    mkdir -p /tmp/build/usr/local/lib/luarocks
+    mkdir -p /tmp/build/usr/local/share/lua
+    mkdir -p /tmp/build/usr/local/lib/lua
+
     sed -i 's/\/tmp\/build//' `grep -l -I -r '\/tmp\/build' /tmp/build/`
 }
 
