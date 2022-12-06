@@ -11,6 +11,7 @@ export $(grep -v '^#' $SCRIPT_DIR/.env | xargs)
 
 function test() {
     cp -R /tmp/build/* /
+    mv /tmp/build /tmp/buffer # Check we didn't link dependencies to `/tmp/build/...`
 
     /usr/local/kong/bin/openssl version     # From kong-openssl test.sh
     ls -la /usr/local/kong/lib/libyaml.so   # From kong-openssl test.sh
@@ -22,6 +23,8 @@ function test() {
     ls -l /usr/local/openresty/lualib/resty/websocket/*.lua
     grep _VERSION /usr/local/openresty/lualib/resty/websocket/*.lua
     luarocks --version
+
+    mv /tmp/buffer /tmp/build
 }
 
 test
