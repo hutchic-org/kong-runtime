@@ -10,6 +10,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 export $(grep -v '^#' $SCRIPT_DIR/.env | xargs)
 
 function main() {
+    echo '--- installing kong runtime ---'
     with_backoff curl --fail -sSLo pcre.tar.gz "https://downloads.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.gz"
     tar -xzvf pcre.tar.gz
     ln -s pcre-${PCRE_VERSION} pcre
@@ -39,6 +40,7 @@ function main() {
     popd
 
     pushd openresty-${OPENRESTY_VERSION}
+        echo '--- installing openresty ---'
         OPENRESTY_OPTS=(
             "--prefix=/usr/local/openresty"
             "--with-pcre-jit"
@@ -79,8 +81,10 @@ function main() {
     pushd /tmp/lua-resty-events
         make install LUA_LIB_DIR=/tmp/build/usr/local/openresty/lualib
     popd
+    echo '--- installed openresty ---'
 
     pushd /tmp/luarocks-${LUAROCKS_VERSION}
+        echo '--- installing luarocks ---'
         ./configure \
             --prefix=/usr/local \
             --with-lua=/tmp/build/usr/local/openresty/luajit \
@@ -88,13 +92,14 @@ function main() {
 
         make build -j2
         make install DESTDIR=/tmp/build
+        echo '--- installed luarocks ---'
     popd
 
     arch=$(uname -m)
 
     package_architecture=x86_64
     if [ "$(arch)" == "aarch64" ]; then
-    package_architecture=aarch64
+        package_architecture=aarch64
     fi
 
     curl -fsSLo atc-router.tar.gz https://github.com/hutchic/atc-router/releases/download/$ATC_ROUTER_VERSION/$package_architecture-unknown-$OSTYPE.tar.gz
@@ -105,6 +110,7 @@ function main() {
     mkdir -p /tmp/build/usr/local/lib/lua
 
     sed -i 's/\/tmp\/build//' `grep -l -I -r '\/tmp\/build' /tmp/build/`
+    echo '--- installed kong runtime ---'
 }
 
 # Retries a command a configurable number of times with backoff.
