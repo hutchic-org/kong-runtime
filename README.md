@@ -1,19 +1,88 @@
-# Generic Github Repository Template
+# Kong-OpenSSL
 
-Generic github repository template that keeps child repositories sync'd
+This repository provides pre-built kong runtime artifacts for use by Kong Gateway.
 
-Use this template as a sensible baseline for new github repositories.
+## Getting Started
 
-## Instructions
+### Updating the Versions
 
-- Create template from repository
-- Install the [settings app](https://github.com/apps/settings) on the new repository
-- Remove and re-add the `.github/settings.yml` file so the settings app gets enabled
-- From the new repository settings page enable "Allow auto-merge"
-- Following the [CODEOWNERS SYNTAX](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax) guidelines, update the new repository CODEOWNERS file
-- Following our [Github bot guidline documentation](https://konghq.atlassian.net/wiki/spaces/ENGEN/pages/2720268304/How+To+-+Github+Automation+Guidelines) add a github and dependabot secret for AUTO_MERGE_TOKEN
-- **Update** the .github/template-sync.yml file in [kong/template-github-release](https://github.com/Kong/template-github-release) repository with the **cloned repository name** to enable template sync changes
-- Update .releaserc to have the correct repository name
-- Correct the image name in `.github/workflows/release.yaml`
-- Correct the image name in `Makefile`
-- Remove the sync workflow at `.github/template-sync.yml` and `.github/workflows/sync.yml`
+All software versions are pinned in the `.env` file
+
+### Using
+
+Use the most recent artifact that matches your CPU architecutre and OSTYPE
+from the [Releases](https://github.com/Kong/kong-runtime/releases) page or
+alternatively a docker image from the [packages](https://github.com/Kong/kong-runtime/pkgs/container/kong-runtime)
+page.
+
+For example
+```
+#!/usr/bin/env bash
+
+arch=$(uname -m)
+
+KONG_RUNTIME_VER="${KONG_RUNTIME_VER:-1.1.0}"
+package_architecture=x86_64
+if [ "$(arch)" == "aarch64" ]; then
+    package_architecture=aarch64
+fi
+curl --fail -sSLo kong-runtime.tar.gz https://github.com/Kong/kong-runtime/releases/download/$KONG_RUNTIME_VER/$package_architecture-$OSTYPE.tar.gz
+tar -C /tmp/build -xvf kong-runtime.tar.gz
+```
+
+The gcr.io docker tag naming setup is:
+```
+ghcr.io/kong/kong-runtime:${GITHUB_RELEASE}-${OSTYPE}
+# Example gcr.io/kong/kong-runtime:1.1.4-linux-musl which is a multi-architecture image
+
+ghcr.io/kong/kong-runtime:${GITHUB_RELEASE}-${ARCHITECTURE}-${OSTYPE}
+# Example gcr.io/kong/kong-runtime:1.1.0-aarch64-linux-musl
+
+ghcr.io/kong/kong-runtime:${GIT_SHA}-${ARCHITECTURE}-${OSTYPE}
+# Example kong-runtime:sha-17a5f5f-aarch64-linux-gnu
+```
+
+### Building
+
+Prerequisites:
+
+- make
+- docker w\ buildkit
+
+```
+# Set desired environment variables. If not set the below are the defaults when this document was written
+ARCHITECTURE=x86_64
+OSTYPE=linux-gnu
+
+make build/package
+```
+Will result in a local docker image and the build result in the `package` directory
+
+
+The same result without `make`
+
+```
+ARCHITECTURE=x86_64
+OSTYPE=linux-gnu
+
+docker buildx build \
+    --build-arg ARCHITECTURE=$(ARCHITECTURE) \
+    --build-arg OSTYPE=$(OSTYPE) \
+    --target=package \
+    -o package .
+```
+
+
+A **similar** result without `docker`
+
+```
+ARCHITECTURE=x86_64
+OSTYPE=linux-gnu
+
+./build.sh
+
+ls -la /tmp/build
+```
+*This will use your local compiler / linker so the result will not be
+equivalent to a docker build and there's a strong chance the result will
+not be compatible with all platforms we target for release*
