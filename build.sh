@@ -102,7 +102,7 @@ function main() {
         package_architecture=aarch64
     fi
 
-    curl -fsSLo atc-router.tar.gz https://github.com/hutchic/atc-router/releases/download/$ATC_ROUTER_VERSION/$package_architecture-unknown-$OSTYPE.tar.gz
+    curl -fsSLo atc-router.tar.gz https://github.com/hutchic/atc-router/releases/download/$/$package_architecture-unknown-$OSTYPE.tar.gz
     tar -C /tmp/build -xvf atc-router.tar.gz
 
     mkdir -p /tmp/build/usr/local/lib/luarocks

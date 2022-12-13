@@ -11,8 +11,8 @@ All software versions are pinned in the `.env` file
 ### Using
 
 Use the most recent artifact that matches your CPU architecutre and OSTYPE
-from the [Releases](https://github.com/Kong/kong-runtime/releases) page or
-alternatively a docker image from the [packages](https://github.com/Kong/kong-runtime/pkgs/container/kong-runtime)
+from the [Releases](https://github.com/hutchic-org/kong-runtime/releases) page or
+alternatively a docker image from the [packages](https://github.com/hutchic-org/kong-runtime/pkgs/container/kong-runtime)
 page.
 
 For example
@@ -26,19 +26,19 @@ package_architecture=x86_64
 if [ "$(arch)" == "aarch64" ]; then
     package_architecture=aarch64
 fi
-curl --fail -sSLo kong-runtime.tar.gz https://github.com/Kong/kong-runtime/releases/download/$KONG_RUNTIME_VER/$package_architecture-$OSTYPE.tar.gz
+curl --fail -sSLo kong-runtime.tar.gz https://github.com/hutchic-org/kong-runtime/releases/download/$KONG_RUNTIME_VER/$package_architecture-$OSTYPE.tar.gz
 tar -C /tmp/build -xvf kong-runtime.tar.gz
 ```
 
 The gcr.io docker tag naming setup is:
 ```
-ghcr.io/kong/kong-runtime:${GITHUB_RELEASE}-${OSTYPE}
-# Example gcr.io/kong/kong-runtime:1.1.4-linux-musl which is a multi-architecture image
+ghcr.io/hutchic-org/kong-runtime:${GITHUB_RELEASE}-${OSTYPE}
+# Example gcr.io/hutchic-org/kong-runtime:1.1.4-linux-musl which is a multi-architecture image
 
-ghcr.io/kong/kong-runtime:${GITHUB_RELEASE}-${ARCHITECTURE}-${OSTYPE}
-# Example gcr.io/kong/kong-runtime:1.1.0-aarch64-linux-musl
+ghcr.io/hutchic-org/kong-runtime:${GITHUB_RELEASE}-${ARCHITECTURE}-${OSTYPE}
+# Example gcr.io/hutchic-org/kong-runtime:1.1.0-aarch64-linux-musl
 
-ghcr.io/kong/kong-runtime:${GIT_SHA}-${ARCHITECTURE}-${OSTYPE}
+ghcr.io/hutchic-org/kong-runtime:${GIT_SHA}-${ARCHITECTURE}-${OSTYPE}
 # Example kong-runtime:sha-17a5f5f-aarch64-linux-gnu
 ```
 
