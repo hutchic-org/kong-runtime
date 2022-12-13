@@ -11,6 +11,7 @@ export $(grep -v '^#' $SCRIPT_DIR/.env | xargs)
 
 function main() {
     echo '--- installing kong runtime ---'
+    echo '--- downloading components ---'
     with_backoff curl --fail -sSLo pcre.tar.gz "https://downloads.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.gz"
     tar -xzvf pcre.tar.gz
     ln -s pcre-${PCRE_VERSION} pcre
@@ -29,6 +30,8 @@ function main() {
 
     with_backoff git clone --single-branch --branch ${LUA_RESTY_EVENTS_VERSION} https://github.com/Kong/lua-resty-events --recursive
 
+    echo '--- components downloaded ---'
+    echo '--- patching openresty ---'
     pushd openresty-${OPENRESTY_VERSION}/bundle
         for patch_file in $(ls /tmp/patches/*.patch); do
             patch -p1 < $patch_file
@@ -38,6 +41,7 @@ function main() {
         lj_release_date=$(echo ${lj_dir} | sed -e 's/LuaJIT-[[:digit:]]\+.[[:digit:]]\+-\([[:digit:]]\+\)/\1/')
         lj_version_tag="LuaJIT\ 2.1.0-${lj_release_date}"
     popd
+    echo '--- patched openresty ---'
 
     pushd openresty-${OPENRESTY_VERSION}
         echo '--- installing openresty ---'
@@ -102,7 +106,7 @@ function main() {
         package_architecture=aarch64
     fi
 
-    curl -fsSLo atc-router.tar.gz https://github.com/hutchic/atc-router/releases/download/$/$package_architecture-unknown-$OSTYPE.tar.gz
+    curl -fsSLo atc-router.tar.gz https://github.com/hutchic-org/atc-router/releases/download/$ATC_ROUTER_VERSION/$package_architecture-unknown-$OSTYPE.tar.gz
     tar -C /tmp/build -xvf atc-router.tar.gz
 
     mkdir -p /tmp/build/usr/local/lib/luarocks
