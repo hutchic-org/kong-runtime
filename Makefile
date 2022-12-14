@@ -12,6 +12,8 @@ clean:
 	-docker rmi $(DOCKER_NAME)
 
 docker:
+	-git submodule update --init --recursive
+	-git submodule stats
 	docker buildx build \
 		--build-arg DOCKER_REGISTRY=$(DOCKER_REGISTRY) \
 		--build-arg DOCKER_IMAGE_NAME=$(DOCKER_IMAGE_NAME) \
