@@ -24,12 +24,6 @@ function main() {
     tar -xzvf luarocks.tar.gz
     ln -s luarocks-${LUAROCKS_VERSION} luarocks
 
-    with_backoff git clone --single-branch --branch ${KONG_NGINX_MODULE_VERSION} https://github.com/Kong/lua-kong-nginx-module
-
-    with_backoff git clone --single-branch --branch ${LUA_RESTY_LMDB_VERSION} https://github.com/Kong/lua-resty-lmdb --recursive
-
-    with_backoff git clone --single-branch --branch ${LUA_RESTY_EVENTS_VERSION} https://github.com/Kong/lua-resty-events --recursive
-
     echo '--- components downloaded ---'
     echo '--- patching openresty ---'
     pushd openresty-${OPENRESTY_VERSION}/bundle
