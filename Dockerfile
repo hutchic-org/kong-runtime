@@ -20,7 +20,7 @@ WORKDIR /tmp
 # Configure, build, and install
 # Run our own tests
 # Re-run our predecessor tests
-ENV DEBUG=1
+ENV DEBUG=0
 RUN /test/*/test.sh && \
     /tmp/build.sh && \
     /tmp/test.sh && \
