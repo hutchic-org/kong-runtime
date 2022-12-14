@@ -13,7 +13,7 @@ clean:
 
 docker:
 	-git submodule update --init --recursive
-	-git submodule stats
+	-git submodule status
 	docker buildx build \
 		--build-arg DOCKER_REGISTRY=$(DOCKER_REGISTRY) \
 		--build-arg DOCKER_IMAGE_NAME=$(DOCKER_IMAGE_NAME) \
