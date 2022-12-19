@@ -25,6 +25,7 @@ function test() {
     grep _VERSION /usr/local/openresty/lualib/resty/websocket/*.lua
     luarocks --version
 
+    ls -la /usr/local/openresty/lualib/libatc_router.so
     #ldd /usr/local/openresty/lualib/libatc_router.so
 
     mv /tmp/buffer /tmp/build
