@@ -125,3 +125,11 @@ jobs:
           ghcr.io/hutchic-org/kong-runtime:${{ needs.release.outputs.release-git-tag }}-aarch64-${{ matrix.ostype }} \
           ghcr.io/hutchic-org/kong-runtime:${{ needs.release.outputs.release-git-tag }}-x86_64-${{ matrix.ostype }}
         docker manifest push ghcr.io/hutchic-org/kong-runtime:${{ needs.release.outputs.release-git-tag }}-${{ matrix.ostype }}
+
+  done:
+    needs: [artifacts]
+    name: Done
+    if: needs.artifacts.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo 'done'
