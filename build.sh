@@ -48,7 +48,7 @@ function main() {
             "--with-http_stub_status_module"
             "--with-http_v2_module"
             "--without-http_encrypted_session_module"
-            "--with-luajit-xcflags='-DLUAJIT_VERSION=\\\"${lj_version_tag}\\\"'"
+            "--with-luajit-xcflags='-std=gnu99 -DLUAJIT_VERSION=\\\"${lj_version_tag}\\\"'"
             "-j2"
         )
 
