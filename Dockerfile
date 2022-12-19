@@ -12,10 +12,10 @@ FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.1.3-aarch6
 
 # Kong openssl image as our base
 # List out all image permutations to trick dependabot
-FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.0.0-x86_64-linux-musl as x86_64-linux-musl
-FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.0.0-x86_64-linux-gnu as x86_64-linux-gnu
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.0.0-aarch64-linux-musl as aarch64-linux-musl
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.0.0-aarch64-linux-gnu as aarch64-linux-gnu
+FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.0.3-x86_64-linux-musl as x86_64-linux-musl
+FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.0.3-x86_64-linux-gnu as x86_64-linux-gnu
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.0.3-aarch64-linux-musl as aarch64-linux-musl
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.0.3-aarch64-linux-gnu as aarch64-linux-gnu
 
 FROM atc-router-$ARCHITECTURE-$OSTYPE as atc-router
 
