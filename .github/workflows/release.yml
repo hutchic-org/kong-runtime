@@ -36,8 +36,11 @@ jobs:
     name: Create Release Artifacts
     strategy:
       matrix:
-        architecture: [aarch64, x86_64]
+        architecture: [aarch64, x86_64, s390x]
         ostype: [linux-gnu, linux-musl]
+        exclude:
+        - architecture: s390x
+          ostype: linux-musl
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
