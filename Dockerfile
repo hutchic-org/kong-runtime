@@ -30,8 +30,9 @@ WORKDIR /tmp
 # Run our own tests
 # Re-run our predecessor tests
 ENV DEBUG=0
-COPY --from=atc-router / /
-RUN /test/*/test.sh && \
+COPY --from=atc-router / /atc-router
+RUN cp -R /atc-router/* /tmp/build/ && \
+    /test/*/test.sh && \
     /tmp/build.sh && \
     /tmp/test.sh && \
     /test/*/test.sh
