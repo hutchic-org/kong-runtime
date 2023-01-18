@@ -33,6 +33,7 @@ FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.2.4-aarch64-linux
 RUN echo 'noop'
 
 FROM atc-router-$ARCHITECTURE-$OSTYPE as atc-router
+RUN echo 'noop'
 
 # Run the build script
 FROM $ARCHITECTURE-$OSTYPE as build
