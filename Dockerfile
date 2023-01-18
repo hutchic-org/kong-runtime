@@ -6,16 +6,16 @@ ARG DOCKER_IMAGE_NAME
 # ATC-router image to copy in the installed atc-router
 # List out all image permutations to trick dependabot
 FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.8-x86_64-unknown-linux-musl as atc-router-x86_64-linux-musl
-RUN echo 'noop'
+COPY touch /touch
 
 FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.8-x86_64-unknown-linux-gnu as atc-router-x86_64-linux-gnu
-RUN echo 'noop'
+COPY touch /touch
 
 FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.8-aarch64-unknown-linux-musl as atc-router-aarch64-linux-musl
-RUN echo 'noop'
+COPY touch /touch
 
 FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.8-aarch64-unknown-linux-gnu as atc-router-aarch64-linux-gnu
-RUN echo 'noop'
+COPY touch /touch
 
 
 # Kong openssl image as our base
