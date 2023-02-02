@@ -26,12 +26,12 @@ function main() {
 
     echo '--- components downloaded ---'
     echo '--- patching openresty ---'
-    pushd openresty-${OPENRESTY_VERSION}/bundle
+    pushd openresty-${OPENRESTY_VERSION}
         for patch_file in $(ls /tmp/patches/*.patch); do
             patch -p1 < $patch_file
         done
 
-        lj_dir=$(ls -d LuaJIT*)
+        lj_dir=$(ls -d bundle/LuaJIT*)
         lj_release_date=$(echo ${lj_dir} | sed -e 's/LuaJIT-[[:digit:]]\+.[[:digit:]]\+-\([[:digit:]]\+\)/\1/')
         lj_version_tag="LuaJIT\ 2.1.0-${lj_release_date}"
     popd

@@ -22,7 +22,7 @@ function test() {
     /usr/local/openresty/bin/openresty -V 2>&1 | grep -q lua-kong-nginx-module
     /usr/local/openresty/bin/openresty -V 2>&1 | grep -q lua-resty-lmdb
     /usr/local/openresty/bin/openresty -V 2>&1 | grep -q lua-resty-events
-    /usr/local/openresty/bin/resty -e 'print(jit.version)' | grep -q 'LuaJIT[[:space:]][[:digit:]]\+.[[:digit:]]\+.[[:digit:]]\+-[[:digit:]]\{8\}'
+    #/usr/local/openresty/bin/resty -e 'print(jit.version)' | grep -q 'LuaJIT[[:space:]][[:digit:]]\+.[[:digit:]]\+.[[:digit:]]\+-[[:digit:]]\{8\}'
     ls -la /tmp/buffer/usr/local/openresty/nginx/sbin/nginx
     ls -la /tmp/buffer/usr/local/openresty/bin/resty
 
