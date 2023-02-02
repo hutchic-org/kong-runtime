@@ -5,18 +5,18 @@ ARG DOCKER_IMAGE_NAME
 
 # ATC-router image to copy in the installed atc-router
 # List out all image permutations to trick dependabot
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.10-x86_64-unknown-linux-musl as atc-router-x86_64-linux-musl
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.10-x86_64-unknown-linux-gnu as atc-router-x86_64-linux-gnu
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.10-aarch64-unknown-linux-musl as atc-router-aarch64-linux-musl
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.10-aarch64-unknown-linux-gnu as atc-router-aarch64-linux-gnu
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.15-x86_64-unknown-linux-musl as atc-router-x86_64-linux-musl
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.15-x86_64-unknown-linux-gnu as atc-router-x86_64-linux-gnu
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.15-aarch64-unknown-linux-musl as atc-router-aarch64-linux-musl
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.15-aarch64-unknown-linux-gnu as atc-router-aarch64-linux-gnu
 
 
 # Kong openssl image as our base
 # List out all image permutations to trick dependabot
-FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.2.7-x86_64-linux-musl as x86_64-linux-musl
-FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.2.7-x86_64-linux-gnu as x86_64-linux-gnu
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.2.7-aarch64-linux-musl as aarch64-linux-musl
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.2.7-aarch64-linux-gnu as aarch64-linux-gnu
+FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.2.8-x86_64-linux-musl as x86_64-linux-musl
+FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.2.8-x86_64-linux-gnu as x86_64-linux-gnu
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.2.8-aarch64-linux-musl as aarch64-linux-musl
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.2.8-aarch64-linux-gnu as aarch64-linux-gnu
 
 FROM atc-router-$ARCHITECTURE-$OSTYPE as atc-router
 
