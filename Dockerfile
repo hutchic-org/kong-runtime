@@ -5,10 +5,10 @@ ARG DOCKER_IMAGE_NAME
 
 # ATC-router image to copy in the installed atc-router
 # List out all image permutations to trick dependabot
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.15-x86_64-unknown-linux-musl as atc-router-x86_64-linux-musl
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.15-x86_64-unknown-linux-gnu as atc-router-x86_64-linux-gnu
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.15-aarch64-unknown-linux-musl as atc-router-aarch64-linux-musl
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/atc-router-compiled:1.3.15-aarch64-unknown-linux-gnu as atc-router-aarch64-linux-gnu
+FROM ghcr.io/hutchic-org/atc-router-compiled:1.3.15-x86_64-unknown-linux-musl as atc-router-x86_64-linux-musl
+FROM ghcr.io/hutchic-org/atc-router-compiled:1.3.15-x86_64-unknown-linux-gnu as atc-router-x86_64-linux-gnu
+FROM ghcr.io/hutchic-org/atc-router-compiled:1.3.15-aarch64-unknown-linux-musl as atc-router-aarch64-linux-musl
+FROM ghcr.io/hutchic-org/atc-router-compiled:1.3.15-aarch64-unknown-linux-gnu as atc-router-aarch64-linux-gnu
 
 
 # Kong openssl image as our base
