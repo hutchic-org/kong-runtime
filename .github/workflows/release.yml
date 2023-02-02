@@ -50,8 +50,8 @@ jobs:
       uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
       with:
         registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        username: hutchic
+        password: ${{ secrets.GH_TOKEN }}
 
     - uses: docker/setup-qemu-action@v2
 
