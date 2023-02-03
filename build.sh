@@ -93,6 +93,16 @@ function main() {
         echo '--- installed luarocks ---'
     popd
 
+    arch=$(uname -m)
+
+    package_architecture=x86_64
+    if [ "$(arch)" == "aarch64" ]; then
+        package_architecture=aarch64
+    fi
+
+    curl -fsSLo atc-router.tar.gz https://github.com/hutchic-org/atc-router-compiled/releases/download/$ATC_ROUTER_VERSION/$package_architecture-unknown-$OSTYPE.tar.gz
+    tar -C /tmp/build -xvf atc-router.tar.gz
+
     mkdir -p /tmp/build/usr/local/lib/luarocks
     mkdir -p /tmp/build/usr/local/share/lua
     mkdir -p /tmp/build/usr/local/lib/lua
