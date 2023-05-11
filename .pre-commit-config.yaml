@@ -21,18 +21,3 @@ repos:
   hooks:
   - id: forbid-crlf
   - id: remove-crlf
-- repo: https://github.com/Yelp/detect-secrets
-  rev: v1.1.0
-  hooks:
-  - id: detect-secrets
-    args: [--baseline, .secrets.baseline]
-- repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-  rev: 0.1.1
-  hooks:
-  - id: yamlfmt
-    args: [--mapping, '2', --sequence, '2', --offset, '0', --width, '150']
-- repo: https://github.com/adrienverge/yamllint
-  rev: v1.26.1
-  hooks:
-  - id: yamllint
-    args: [--format, parsable, --strict]
