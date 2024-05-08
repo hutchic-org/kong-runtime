@@ -4,11 +4,10 @@ ARG DOCKER_REGISTRY=ghcr.io
 ARG DOCKER_IMAGE_NAME
 
 # List out all image permutations to trick dependabot
-FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.2.16-x86_64-linux-musl as x86_64-linux-musl
-FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.2.16-x86_64-linux-gnu as x86_64-linux-gnu
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.2.16-aarch64-linux-musl as aarch64-linux-musl
-FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.2.16-aarch64-linux-gnu as aarch64-linux-gnu
-
+FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.2.78-x86_64-linux-musl as x86_64-linux-musl
+FROM --platform=linux/amd64 ghcr.io/hutchic-org/kong-openssl:1.2.78-x86_64-linux-gnu as x86_64-linux-gnu
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.2.78-aarch64-linux-musl as aarch64-linux-musl
+FROM --platform=linux/arm64 ghcr.io/hutchic-org/kong-openssl:1.2.78-aarch64-linux-gnu as aarch64-linux-gnu
 
 # Run the build script
 FROM $ARCHITECTURE-$OSTYPE as build
