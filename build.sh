@@ -27,7 +27,7 @@ function main() {
     echo '--- components downloaded ---'
     echo '--- patching openresty ---'
     pushd openresty-${OPENRESTY_VERSION}
-        for patch_file in $(ls /tmp/patches/*.patch); do
+        for patch_file in $(ls /tmp/kong/build/openresty/patches/*.patch); do
             patch -p1 < $patch_file
         done
 
